@@ -1,5 +1,8 @@
 
+;;;; tangled : lisp-utilities.org
 ;;;; 抄錄於 《On lisp》 第四章
+
+(in-package :lisp-utilities)
 
 ;;; 操作列表的小函數
 (proclaim '(inline last1 single append1 conc1 mklist))

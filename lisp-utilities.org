@@ -1,8 +1,72 @@
 #+TITLE: common lisp 實用工具
+* lisp-utilities.asd
+#+BEGIN_SRC lisp :tangle lisp-utilities.asd :padline no
+;;;; -*- Mode: LISP; Syntax: ANSI-Common-Lisp; Base: 10 -*-
+;;; tangled :lisp-utilities.org
+
+(in-package :cl-user)
+
+(in-package #:asdf-user)
+
+(defsystem #:lisp-utilities
+  :version "0.1.0"
+  :author "Colin <every.push.colin@gmail.com>"
+  ;; :depends-on (:cl-ppcre :asdf)
+  :components ((:file "packages")
+	       (:file "lisp-utilities")))
+
+
+#+END_SRC
+* packages.lisp
+#+BEGIN_SRC lisp :tangle packages.lisp
+;;; tangled : lisp-utilities.org
+
+(in-package :cl-user)
+
+(defpackage :lisp-utilities
+  (:use :common-lisp)
+  (:export :last1
+	   :single
+	   :append1
+	   :conc1
+	   :mklist
+	   :filter
+	   :group
+	   :flatten
+	   :prune
+	   :find2
+	   :before
+	   :after
+	   :duplicate
+	   :split-if
+	   :most
+	   :best
+	   :mostn
+	   :mapa-b
+	   :map0-1
+	   :map0-n
+	   :map1-n
+	   :map->
+	   :mappend
+	   :mapacars
+	   :rmapcar
+	   :readlist
+	   :prompt
+	   :break-loop
+	   :mkstr
+	   :symb
+	   :reread
+	   :explode))
+	   
+
+#+END_SRC
 * 實用函數
   抄錄於 《On lisp》 第四章
 #+BEGIN_SRC lisp :tangle lisp-utilities.lisp
+;;;; tangled : lisp-utilities.org
 ;;;; 抄錄於 《On lisp》 第四章
+
+(in-package :lisp-utilities)
 
 #+END_SRC
 ** 操作列表的小函數
