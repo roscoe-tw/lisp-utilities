@@ -1,62 +1,64 @@
 #+TITLE: common lisp 實用工具
 * lisp-utilities.asd
 #+BEGIN_SRC lisp :tangle lisp-utilities.asd :padline no
-;;;; -*- Mode: LISP; Syntax: ANSI-Common-Lisp; Base: 10 -*-
-;;; tangled :lisp-utilities.org
+  ;;;; -*- Mode: LISP; Syntax: ANSI-Common-Lisp; Base: 10 -*-
+  ;;; tangled :lisp-utilities.org
 
-(in-package :cl-user)
+  (in-package :cl-user)
 
-(in-package #:asdf-user)
+  (in-package #:asdf-user)
 
-(defsystem #:lisp-utilities
-  :version "0.1.0"
-  :author "Colin <every.push.colin@gmail.com>"
-  ;; :depends-on (:cl-ppcre :asdf)
-  :components ((:file "packages")
-	       (:file "lisp-utilities")))
+  (defsystem #:lisp-utilities
+    :version "0.1.0"
+    :author "Colin <every.push.colin@gmail.com>"
+    ;; :depends-on (:cl-ppcre :asdf)
+    :components ((:file "packages")
+		 (:file "lisp-utilities")
+		 (:file "practical_common_lisp")))
 
 
 #+END_SRC
 * packages.lisp
 #+BEGIN_SRC lisp :tangle packages.lisp
-;;; tangled : lisp-utilities.org
+  ;;; tangled : lisp-utilities.org
 
-(in-package :cl-user)
+  (in-package :cl-user)
 
-(defpackage :lisp-utilities
-  (:use :common-lisp)
-  (:export :last1
-	   :single
-	   :append1
-	   :conc1
-	   :mklist
-	   :filter
-	   :group
-	   :flatten
-	   :prune
-	   :find2
-	   :before
-	   :after
-	   :duplicate
-	   :split-if
-	   :most
-	   :best
-	   :mostn
-	   :mapa-b
-	   :map0-1
-	   :map0-n
-	   :map1-n
-	   :map->
-	   :mappend
-	   :mapacars
-	   :rmapcar
-	   :readlist
-	   :prompt
-	   :break-loop
-	   :mkstr
-	   :symb
-	   :reread
-	   :explode))
+  (defpackage :lisp-utilities
+    (:use :common-lisp)
+    (:export :last1
+	     :single
+	     :append1
+	     :conc1
+	     :mklist
+	     :filter
+	     :group
+	     :flatten
+	     :prune
+	     :find2
+	     :before
+	     :after
+	     :duplicate
+	     :split-if
+	     :most
+	     :best
+	     :mostn
+	     :mapa-b
+	     :map0-1
+	     :map0-n
+	     :map1-n
+	     :map->
+	     :mappend
+	     :mapacars
+	     :rmapcar
+	     :readlist
+	     :prompt
+	     :break-loop
+	     :mkstr
+	     :symb
+	     :reread
+	     :explode
+	     :with-gensyms))
 	   
 
 #+END_SRC
@@ -296,5 +298,16 @@
 		 (intern (make-string 1
 				      :initial-element c)))
 	(symbol-name sym)))
+
+#+END_SRC
+* 抄錄於《Practical Common Lisp》
+** with-gensyms
+#+BEGIN_SRC lisp :tangle practical_common_lisp.lisp
+  ;;;tangled : lisp-utilities.org
+  (in-package :lisp-utilities)
+
+  (defmacro with-gensyms ((&rest names) &body body)
+    `(let ,(loop for n in names collect `(,n (gensym)))
+       ,@body))
 
 #+END_SRC
